@@ -1,0 +1,58 @@
+author:
+  name: Radek Jaźwiec
+  affiliation: Celon Pharma S.A.
+  email: radoslaw.jazwiec@celonpharma.com
+  orcid: 0000-0002-9272-6233
+
+date: last-modified
+date-format: "DD-MM-YYYY"
+
+bibliography:
+  - inc/references_r_packages.bib
+  - inc/references_regulatory.bib
+
+csl: inc/diabetologia.csl
+
+nameref:
+  section-number: true
+
+format:
+  pdf:
+    documentclass: clreptcl
+    pdf-engine: xelatex
+    papersize: a4
+    toc: false
+    lot: false
+    lof: false
+    template-partials:
+      - inc/title.tex
+      - inc/before-body.tex
+      - inc/before-title.tex
+    code-block-bg: "#FFFFFF"
+    fig-pos: "h"
+    code-line-numbers: true
+    number-sections: true
+    monofont: Source Code Pro
+    monofontoptions:
+      - Scale=0.7
+  html:
+    css: inc/styles.css
+    toc: true
+    toc-depth: 4
+    self-contained: true
+    format-links: false
+    code-fold: true
+    number-sections: true
+    math:
+      numbering: true
+    page-layout: article
+    sidebar:
+      style: floating
+      alignment: center
+      width: 560px
+
+mainfont: Calibri
+
+editor:
+  markdown:
+    wrap: 72

@@ -1,0 +1,124 @@
+$if(title)$
+\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$endif$
+
+$if(params.is_draft)$
+\usepackage{draftwatermark}
+\SetWatermarkText{DRAFT $params.version$}
+\SetWatermarkScale{0.85}
+\SetWatermarkColor[gray]{0.95}
+$endif$
+
+$if(params.projectno)$
+$if(params.is_draft)$
+\newcommand{\project}{Study $params.projectno$ - Draft version $params.version$, Dated: \today}
+$else$
+\newcommand{\project}{Study $params.projectno$ - Final version $params.version$, Dated: \today}
+$endif$
+$else$
+\newcommand{\project}{ Generated: \today}
+$endif$
+
+\internalstudyno{$params.projectno$}
+\protocolno{$params.protocolno$}
+
+$if(params.is_draft)$
+\reportversion{Draft version $params.version$}
+$else$
+\reportversion{Final version $params.version$}
+$endif$
+
+$if(params.is_appendix)$
+$if(params.appendix_no)$
+\newcommand{\appage}{Appendix $params.appendix_no$: \thepage}
+$else$
+\newcommand{\appage}{Appendix: \thepage}
+$endif$
+$else$
+\newcommand{\appage}{\thepage}
+$endif$
+
+
+$if(subtitle)$
+$if(beamer)$
+$else$
+\subtitle{$subtitle$}
+$endif$
+$endif$
+\authorplain{$for(authors)$$authors.name.literal$$sep$ and $endfor$}
+%\author{$for(authors)$$it.name.literal$$sep$ \and $endfor$}
+\author{
+$for(authors)$
+  $authors.name.literal$\\[-2pt]
+  {\small \faEnvelope\; \href{mailto:$authors.email$}{\texttt{$authors.email$}}}
+  $sep$ \and
+$endfor$
+}
+\date{$date$}
+$if(beamer)$
+$if(institute)$
+\institute{$for(institute)$$institute$$sep$ \and $endfor$}
+$endif$
+$if(titlegraphic)$
+\titlegraphic{\includegraphics{$titlegraphic$}}
+$endif$
+$if(logo)$
+\logo{\includegraphics{$logo$}}
+$endif$
+$endif$
+
+\usepackage{lastpage}
+%\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+\usepackage{pdflscape}
+
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+
+\makeatletter
+$if(params.shorttitle)$
+\newcommand{\mytitle}{$params.shorttitle$}
+$else$
+\edef\mytitle{\@title}
+$endif$
+\makeatother
+
+
+\fancypagestyle{fancy}{%{%
+		\fancyhf{}% clear all header and footer fields
+		\fancyhead[L]{\includegraphics[width=2cm]{../../inc/celon.png}}
+		\fancyhead[R]{\mytitle}
+		\fancyfoot[L]{\project}
+		\fancyfoot[R]{\appage\ of \pageref*{LastPage}} % except the center
+		\renewcommand{\headrulewidth}{0.3pt}%
+		\renewcommand{\footrulewidth}{0.3pt}%
+	}
+
+\fancypagestyle{titlepage}{%
+		\fancyhf{}% clear all header and footer fields
+		\fancyhead[L]{\includegraphics[width=4cm]{../../inc/celon.png}}
+		\fancyfoot[C]{\parbox{0.85\textwidth}{\centering\bfseries\footnotesize
+			This document is confidential. It should not be disclosed to
+			a third party, with the exception of bioethics committee, regulatory
+			authorities, study site and audit personnel. Reproduction,
+			modification or adaptation, in part or in total, is strictly
+			forbidden without prior written approval of Celon Pharma S.A.%
+		}}
+		\renewcommand{\headrulewidth}{0pt}%
+		\renewcommand{\footrulewidth}{0pt}%
+	}
+
+\fancypagestyle{plain}{%
+		\fancyhf{}% clear all header and footer fields
+		\fancyhead[L]{\includegraphics[width=2cm]{../../inc/celon.png}}
+		\fancyfoot[L]{\project}
+		\fancyfoot[R]{\appage\ of \pageref*{LastPage}} % except the center
+		\renewcommand{\headrulewidth}{0.3pt}%
+		\renewcommand{\footrulewidth}{0.3pt}%
+	}
+
+\pagestyle{fancy}
+
+\usepackage{enumitem}
+\setlist[itemize]{label=\textemdash}

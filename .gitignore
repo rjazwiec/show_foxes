@@ -1,0 +1,11 @@
+*.aux
+*.log
+*.tex
+!inc/*.tex
+output/fox_demo/_cache/
+.Rproj.user/
+.quarto/
+*_files/
+
+/.quarto/
+**/*.quarto_ipynb
